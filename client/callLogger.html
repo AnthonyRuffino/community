@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <title>Chat Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/js/modernizr-2.6.2.js"></script>
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+  <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title"><a href="#">ncidence.org</a></p>
+            </div>
+            <div class="float-right">
+                <nav>
+                    <ul id="menu">
+                        <li></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+    
+            <section class="featured">
+                <div class="content-wrapper">
+                    <hgroup class="title">
+                        <h1>Welcome to Ncidence.org</h1>
+                    </hgroup>
+                </div>
+            </section>
+
+            <br />
+            <br/>
+        
+            <div class="container" ng-controller="CallLogController">
+              <div class="page-header">
+                <h2>Call Logger</h2>
+              </div>
+              <div class="row">
+                <div class="span9">
+                  <div class="row controls">
+                    <form ng-submit="send()">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td class="span2">Insurance Type</td>
+                            <td class="span7"><select data-ng-options="i.name for i in insuranceTypes" data-ng-model="selectedInsuranceTypeOption"></select></td>
+                          </tr>
+                          <tr>
+                            <td class="span2">Appointment Reason</td>
+                            <td class="span7"><select data-ng-options="r.name for r in appointmentReasons" data-ng-model="selectedAppointmentReasonOption"></select></td>
+                          </tr>
+                          <tr>
+                            <td class="span2">Scheduling Status</td>
+                            <td class="span7"><select data-ng-options="s.name for s in schedulingStatuses" data-ng-model="selectedSchedulingStatusOption"></select></td>
+                          </tr>
+                          <tr>
+                            <td class="span9"><input type="submit" class="span1 btn btn-primary" value="Log Call"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+              <br/>
+              <h3>Recent Logs</h2>
+              <div class="row">
+                <div class="span9">
+                  <div class="row controls">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th class="span2">Date And Time</th>
+                          <th class="span7">Insurance Type</th>
+                          <th class="span7">Appointment Reason</th>
+                          <th class="span7">Scheduling Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="log in logs">
+                          <td class="span2" ng-bind="log.dateTime"></td>
+                          <td class="span7" ng-bind="log.insuranceType"></td>
+                          <td class="span7" ng-bind="log.appointmentReason"></td>
+                          <td class="span7" ng-bind="log.schedulingStatus"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+              <br/>
+              <form ng-submit="getLogs()">
+                  <input type="submit" class="span1 btn btn-primary" value="Geta All Logs">
+              </form>
+              <br/>
+              <h3>All Logs</h2>
+              <div class="row">
+                <div class="span9">
+                  <div class="row controls">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th class="span2">Call Data</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="log in allLogs">
+                          <td class="span2" ng-bind="log.result"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>2016 - ncidence.org</p>
+            </div>
+        </div>
+    </footer>
+    
+    
+    
+    
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/app/callLogger.js"></script>
+  </body>
+</html>
